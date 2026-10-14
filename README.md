@@ -12,6 +12,24 @@ pnpm build
 pnpm start
 ```
 
+### gitleaks pre-commit (one-time setup)
+
+Install [gitleaks](https://github.com/gitleaks/gitleaks#installing), then add a
+pre-commit hook to stop secrets from being committed. Create
+`.git/hooks/pre-commit`:
+
+```bash
+#!/usr/bin/env bash
+gitleaks protect --staged --verbose
+```
+
+Make it executable: `chmod +x .git/hooks/pre-commit`.
+
+> Branch protection (manual, per new project): template repositories do not
+> inherit branch protection. On each new repo, enable it under Settings →
+> Branches → Add branch protection rule (require a pull request and the CI
+> status check).
+
 ## Test
 
 ```bash
